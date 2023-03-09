@@ -1,0 +1,9 @@
+POST http://localhost:3000/pedidos HTTP/1.1
+content-type: application/json
+
+{
+    "number": "125544",
+    "price": 1254.25,
+    "weight": "1.2",
+    "date": "10/10/2023"
+}
