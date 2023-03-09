@@ -8,6 +8,7 @@ It's a simple nodejs/typescript microservice API ,that basically send messages t
 
 - nodeJS
 - typescript
+- rabbitMQ
 
 
 
