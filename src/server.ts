@@ -1,7 +1,8 @@
-import express, { Application, Request, Response } from 'express';
-import { SetupRabbitMq } from './rabbimq-setup';
+import express, { Application } from 'express';
 export class SetupServer {
-  constructor(private port = 3000, private app = express()) {}
+  constructor(private port = 3000, private app = express()) {
+    this.init();
+  }
 
   public async init(): Promise<void> {
     this.app.use(express.json());
@@ -9,7 +10,7 @@ export class SetupServer {
   }
   public start(): void {
     this.app.listen(this.port, () => {
-      console.info('rabbitMQ CONSUMER running on port: ' + this.port);
+      console.info('rabbitMQ PRODUCER running on port: ' + this.port);
     });
   }
 

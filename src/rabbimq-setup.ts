@@ -1,13 +1,12 @@
-import client, { Connection, Channel, ConsumeMessage } from "amqplib";
+import client, { Connection, Channel } from 'amqplib';
 
 export class SetupRabbitMq {
-  constructor() {}
-
-  private consumer: any;
-  private producer: any;
+  constructor() {
+    this.init();
+  }
   private connection: Connection;
   private channel: Channel;
-  private QUEUE: string = "pedidos";
+  private QUEUE: string = 'pedidos';
 
   public async init(): Promise<void> {
     await this.getConnection();
@@ -17,7 +16,7 @@ export class SetupRabbitMq {
 
   public sendMessage(payload: any): void {
     const message = JSON.stringify(payload);
-    this.channel.sendToQueue(this.QUEUE, Buffer.from(Buffer.from(message)));
+    this.channel.sendToQueue(this.QUEUE, Buffer.from(message));
   }
   private async getConnection() {
     this.connection = await client.connect(
@@ -26,16 +25,5 @@ export class SetupRabbitMq {
   }
   private async createChannel() {
     this.channel = await this.connection.createChannel();
-  }
-
-  private setConsumer() {
-    this.consumer =
-      (channel: Channel) =>
-      (msg: ConsumeMessage | null): void => {
-        if (msg) {
-          console.log(msg.content.toString());
-          this.channel.ack(msg);
-        }
-      };
   }
 }

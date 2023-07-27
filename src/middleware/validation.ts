@@ -2,10 +2,7 @@ import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
 export * from 'class-validator';
 
-export const validationPipe = async (
-  schema: new () => {},
-  requestObject: object
-): Promise<Record<string, string[]>> => {
+export const validationPipe = async (schema: any, requestObject: object): Promise<Record<string, string[]>> => {
   const errorsResult: Record<string, string[]> = {};
   const transformedClass: any = plainToInstance(schema, requestObject);
   const errors = await validate(transformedClass);
